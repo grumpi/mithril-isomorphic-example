@@ -5,12 +5,22 @@ var Promise = require('promise');
 module.exports = {
   dog: {
     get: function(id) {
-      return new Promise(function(resolve) {
-        resolve({
-          id: id,
-          name: 'Dolly'
+      if (id == 123) {
+  
+        return new Promise(function(resolve) {
+          resolve({
+            id: id,
+            name: 'Dolly'
+          });
         });
-      });
+      } else {
+        return new Promise(function(resolve) {
+          resolve({
+            id: id,
+            name: 'Molly <script>alert("tries to do XSS");</script>'
+          });
+        });
+      }
     }
   }
 };

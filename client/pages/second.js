@@ -3,12 +3,20 @@
 var m = require('mithril');
 var store = require('../../store');
 
+
+
 function controller(params, done) {
   var scope = {};
+
   store.load('dog', 123).then(function(dog) {
     scope.myDog = dog;
-    done && done(null, scope);
+    store.load('dog', 12).then(function(dog) {
+      scope.mySecondDog = dog;
+
+      done && done(null, scope); 
+    });
   });
+
   return scope;
 }
 
@@ -16,12 +24,12 @@ function view(scope) {
   return [
     m.trust('<!-- Server side rendering \\o/ -->'),
     m('h1', 'Ohh, another page'),
-    m('p', 'try to realod and look to the response'),
+    m('p', "try to reload and look at the page's source code"),
     m('a', {
       href: '/',
       config: m.route
     }, 'back to home page'),
-    m('p', scope.myDog && ('My dogs name is ' + scope.myDog.name) || '')
+    m('p', scope.myDog && ("My dogs' names are " + scope.myDog.name + " and " + scope.mySecondDog.name) || '')
   ];
 }
 
