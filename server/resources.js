@@ -17,7 +17,7 @@ module.exports = {
         return new Promise(function(resolve) {
           resolve({
             id: id,
-            name: 'Molly <script>alert("tries to do XSS");</script>'
+            name: 'Molly <script>alert("Molly is evil!");</script>'
           });
         });
       }
