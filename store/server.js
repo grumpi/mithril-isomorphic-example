@@ -6,19 +6,24 @@ var session = getNamespace('request-session');
 var resources = require('../server/resources');
 
 
+function collect_request(requestName, requestParams, result) {
+  if (session.get('resources')) {
+    var x = session.get('resources');
+    result.then(function (data) {
+      x.push({name: requestName, params: requestParams, data: result});
+      session.set('resources', x);
+    });
+  }
+}
+
+
 function load(type, id) {
   if (!resources[type]) {
     throw Error('Resource with type "' + type + '" does not exist');
   }
   var result = resources[type].get(id);
-
-  if (session.get('resources')) {
-    var x = session.get('resources');
-    result.then(function (data) {
-      x.push({request: {type: type, id: id}, data: data});
-      session.set('resources', x);
-    });
-  }
+  
+  collect_request('load', [type, id], result);
   return result;
 }
 
@@ -28,7 +33,7 @@ function loadWhere(type, query) {
   }
   var result = resources[type].query(query);
 
-  session.set('test', session.get('test').push(result));
+  collect_request('loadWhere', [type, query], result);
   return result;
 }
 
