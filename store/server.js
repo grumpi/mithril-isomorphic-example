@@ -10,7 +10,7 @@ function collect_request(requestName, requestParams, result) {
   if (session.get('resources')) {
     var x = session.get('resources');
     result.then(function (data) {
-      x.push({name: requestName, params: requestParams, data: result});
+      x[requestName + '|' + String(requestParams)] = data;
       session.set('resources', x);
     });
   }

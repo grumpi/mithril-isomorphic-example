@@ -45,7 +45,7 @@ each(routes, function(module, route) {
     session.bindEmitter(res);
 
     session.run(function () {
-      session.set('resources', []);
+      session.set('resources', {});
       res.type('html');
       function send(scope) {
         var t = session.get('resources');

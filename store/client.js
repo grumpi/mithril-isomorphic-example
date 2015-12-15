@@ -2,6 +2,24 @@
 
 var extend = require('lodash').extend;
 var m = require('mithril');
+var Promise = require('promise');
+
+
+function try_to_get_from_cache(name, params) {
+  var hash = name + '|' + String(params);
+  var result = 0;
+  if (Object.keys(initData).indexOf(hash) != -1) {
+    console.log(["I used the data I found for "+hash+"!", initData[hash], initData]);
+    result = initData[hash];
+  }
+  m.startComputation();
+  if (result) {
+    return new Promise(function (resolve) { m.endComputation(); return resolve(result); });
+  }
+  return 0;
+}
+
+
 
 function apiUrl(type) {
   return '/api/v1/' + type;
@@ -30,10 +48,16 @@ function load(type, id) {
     throw new Error('no id provided to load model');
   }
 
-  return m.request({
-    method: 'GET',
-    url: apiUrl(type + '/' + id),
-  });
+  var result = try_to_get_from_cache('load', [type, id]);
+
+  if (!result) {
+
+    result = m.request({
+      method: 'GET',
+      url: apiUrl(type + '/' + id),
+    });
+  }
+  return result;
 }
 
 function remove(instance) {
@@ -57,11 +81,17 @@ function loadWhere(type, query) {
     throw new Error('no type provided to load model');
   }
   
-  return m.request({
-    method: 'GET',
-    url: apiUrl(type),
-    data: query
-  });
+  var result = try_to_get_from_cache('loadWhere', [type, query]);
+
+  if (!result) {
+
+    result = m.request({
+      method: 'GET',
+      url: apiUrl(type),
+      data: query
+    });
+  }
+  return result;
 }
 
 module.exports = {
