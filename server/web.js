@@ -46,6 +46,7 @@ each(routes, function(module, route) {
 
     session.run(function () {
       session.set('resources', {});
+      session.set('whoami', Math.random().toString(36).substring(7));
       res.type('html');
       function send(scope) {
         var t = session.get('resources');
