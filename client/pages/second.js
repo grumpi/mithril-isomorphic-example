@@ -26,7 +26,7 @@ function view(scope) {
   return [
     m.trust('<!-- Server side rendering \\o/ -->'),
     m('h1', 'Ohh, another page'),
-    m('p', "try to reload and look at the page's source code"),
+    m('p', "try to reload and look at the network traffic"),
     m('a', {
       href: '/',
       config: m.route
