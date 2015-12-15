@@ -10,7 +10,7 @@ var render = require('mithril-node-render');
 
 var app = express();
 
-function base(content, ajax_responses) {
+function base(content, data_to_inline) {
   return [
     '<!doctype html>',
     '<html>',
@@ -20,7 +20,7 @@ function base(content, ajax_responses) {
     '</head>',
     '<body>',
     content,
-    '<script id="resources" type="application/json">', ajax_responses, "</script>",
+    '<script id="resources" type="application/json">', data_to_inline, "</script>",
     "<script>",
     "function html_unescape(input){",
     "  var e = document.createElement('div');",
