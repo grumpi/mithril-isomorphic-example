@@ -5,6 +5,14 @@ See https://github.com/StephanHoyer/mithril-isomorphic-example for how things wo
 
 Reload the page on /second and see what happens (or rather, what does not happen).
 
+## Why?
+
+Think of people loading a largeish, content-heavy mithril app on a slow mobile connection. Instead of having a new user (who most likely followed some link and is expecting to see content) wait until the whole app loaded, it would be nice if they could view the content while the app loads.
+
+In this scenario, the DOM-refresh that mithril will do when it starts up isn't a problem at all - however, the app fetching content again could be. When content changes frequently, it is quite irritating to suddenly see content being swapped out for different content.
+
+That's the problem that embedding the content data in the server-rendered HTML document solves.
+
 ## What is added in this version
 
 * whenever the server accesses the store, the resulting data is collected with continuation-local-store (in store/server.js)
