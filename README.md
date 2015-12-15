@@ -11,8 +11,6 @@ Think of people loading a largeish, content-heavy mithril app on a slow mobile c
 
 In this scenario, the DOM-refresh that mithril will do when it starts up isn't a problem at all - however, the app fetching content again could be. When content changes frequently, it is quite irritating to unexpectedly see content being swapped out for different content.
 
-That's the problem that embedding the content data in the server-rendered HTML document solves.
-
 ## What is added in this version
 
 * we open a local context with continuation-local-storage (in server/web.js)
