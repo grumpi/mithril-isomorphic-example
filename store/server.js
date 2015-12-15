@@ -18,25 +18,13 @@ function collect_request(requestName, requestParams, result) {
 
 
 function load(type, id) {
-
-  var p = new Promise(function (resolve) {
-    var delay = Math.floor(Math.random()*20000);
-
-    setTimeout(function () {
-      if (!resources[type]) {
-        throw Error('Resource with type "' + type + '" does not exist');
-      }
-      var result = resources[type].get(id);
-
-      console.log("serving load for: "+session.get('whoami'));  
-
-      collect_request('load', [type, id], result);
-      resolve(result);
-
-    }, delay);
-  });
-
-  return p;
+  if (!resources[type]) {
+    throw Error('Resource with type "' + type + '" does not exist');
+  }
+  var result = resources[type].get(id);
+  
+  collect_request('load', [type, id], result);
+  return result;
 }
 
 function loadWhere(type, query) {
