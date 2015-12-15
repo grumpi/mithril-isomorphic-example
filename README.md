@@ -15,7 +15,7 @@ That's the problem that embedding the content data in the server-rendered HTML d
 
 ## What is added in this version
 
-* whenever the server accesses the store, the resulting data is collected with continuation-local-store (in store/server.js)
+* whenever the server accesses the store, the resulting data is collected with continuation-local-storage (in store/server.js)
 * the collected data is dumped into the HTML document rendered by the server (in server/web.js)
 * the inline JavaScript code in the generated HTML document unescapes and parses the request data and assigns it to a global variable.
 * on the client side, the store looks for data that was inlined into the HTML document and tries to use that instead of making a request (in store/client.js)
