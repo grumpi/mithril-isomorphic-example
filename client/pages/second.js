@@ -14,7 +14,6 @@ function controller(params, done) {
       console.log(["the second dog is", dog]);
       scope.mySecondDog = dog;
 
-//      m.redraw();
       done && done(null, scope); 
     });
   });

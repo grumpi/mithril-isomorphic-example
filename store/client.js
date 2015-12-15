@@ -12,8 +12,8 @@ function try_to_get_from_cache(name, params) {
     console.log(["I used the data I found for "+hash+"!", initData[hash], initData]);
     result = initData[hash];
   }
-  m.startComputation();
   if (result) {
+    m.startComputation();
     return new Promise(function (resolve) { m.endComputation(); return resolve(result); });
   }
   return 0;
