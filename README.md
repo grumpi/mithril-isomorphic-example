@@ -1,3 +1,6 @@
+
+## Extended mithril-isomorphic-example with Inlined Data in HTML
+
 See https://github.com/StephanHoyer/mithril-isomorphic-example for how things work.
 
 
